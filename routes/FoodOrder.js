@@ -5,6 +5,7 @@ const { check, validationResult } = require('express-validator');
 const FoodMenu = require('../models/FoodMenu');
 const auth = require('../middleware/auth');
 const adminAuth = require('../middleware/adminAuth');
+const User = require('../models/User');
 
 // @route 	 GET api/food-menu
 // @desc 	 Get all menus
