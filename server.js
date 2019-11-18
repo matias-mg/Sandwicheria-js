@@ -13,6 +13,7 @@ app.use(express.json());
 
 // Define routes
 app.use('/api/food-menu', require('./routes/foodMenu'));
+app.use('/api/food-order', require('./routes/foodOrder'));
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/users', require('./routes/users'));
 

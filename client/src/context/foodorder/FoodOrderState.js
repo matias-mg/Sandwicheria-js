@@ -1,29 +1,61 @@
 import React, { useReducer } from 'react';
+import axios from 'axios';
 import FoodOrderContext from './foodOrderContext';
 import foodOrderReducer from './foodOrderReducer';
-import { ADD_FOODORDER, CANCEL_FOODORDER } from '../types';
+import {
+    ADD_FOODORDER,
+    CANCEL_FOODORDER,
+    FOODORDER_ERROR,
+    GET_FOODORDERS,
+    CLEAR_FOODORDERS
+} from '../types';
 
 const FoodOrderState = props => {
     const initialState = {
-        foodOrders: [
-            {
-                id: 3,
-                name: "Promo Sandwich",
-                category: "Sandwich",
-                description: "Rico Sandwich a lo pobre + bebida en lata.",
-                price: 5000,
-                orderDetails: 'Sin salsa de teriyaki, por favor!!',
-                status: "lista para retirar"
-            }
-        ]
+        foodOrders: null,
+        error: null
     };
-
 
     const [state, dispatch] = useReducer(foodOrderReducer, initialState);
 
+    // Get Food orders
+    const getFoodOrders = async () => {
+        try {
+            const res = await axios.get('/api/food-order');
+
+            dispatch({
+                type: GET_FOODORDERS,
+                payload: res.data
+            });
+        } catch (err) {
+            dispatch({
+                type: FOODORDER_ERROR,
+                payload: err.response.msg
+            });
+        }
+    }
+
     // Add Food order
-    const addOrder = (foodMenu) => {
-        dispatch({ type: ADD_FOODORDER, payload: foodMenu });
+    const addOrder = async (foodOrder) => {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+
+        try {
+            const res = await axios.post('/api/food-order', foodOrder, config);
+
+            dispatch({
+                type: ADD_FOODORDER,
+                payload: res.data
+            });
+        } catch (err) {
+            dispatch({
+                type: FOODORDER_ERROR,
+                payload: err.response.msg
+            });
+        }
     }
 
     // Cancel food order
@@ -31,11 +63,26 @@ const FoodOrderState = props => {
         dispatch({ type: CANCEL_FOODORDER, payload: id });
     }
 
+    // Clear food orders after logout
+    const clearOrders = () => {
+        dispatch({
+            type: CLEAR_FOODORDERS
+        })
+    }
+
     return (
-        <FoodOrderContext.Provider value={{ foodOrders: state.foodOrders, addOrder, cancelOrder }}>
+        <FoodOrderContext.Provider value={{
+            foodOrders: state.foodOrders,
+            error: state.error,
+            addOrder,
+            cancelOrder,
+            getFoodOrders,
+            clearOrders
+        }}>
             {props.children}
         </FoodOrderContext.Provider>
     )
+
 }
 
 export default FoodOrderState;

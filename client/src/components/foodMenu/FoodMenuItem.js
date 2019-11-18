@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import uuid from 'uuid';
 import { Link } from 'react-router-dom';
 import { badgeColor, foodCategory } from '../../utilities/functions';
 import PropTypes from 'prop-types';
@@ -12,8 +11,6 @@ function FoodMenuItem({ foodMenu }) {
     const foodOrderContext = useContext(FoodOrderContext);
 
     const addOrder = () => {
-        foodMenu.id = uuid.v4();
-        foodMenu.status = 'en espera';
         foodOrderContext.addOrder(foodMenu);
     }
 

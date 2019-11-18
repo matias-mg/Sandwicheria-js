@@ -1,17 +1,16 @@
 const express = require('express');
 const router = express.Router();
 
-const FoodMenu = require('../models/FoodMenu');
+const FoodOrder = require('../models/FoodOrder');
 const auth = require('../middleware/auth');
-const User = require('../models/User');
 
-// @route 	 GET api/food-menu
-// @desc 	 Get all menus
+// @route 	 GET api/food-order
+// @desc 	 Get all orders
 // @access 	 Private
 router.get('/', auth, async (req, res) => {
     try {
-        const foodMenus = await FoodMenu.find().sort({ date: -1 });
-        res.json(foodMenus);
+        const foodOrder = await FoodOrder.find().sort({ date: -1 });
+        res.json(foodOrder);
     } catch (err) {
         console.error(err.msg);
         res.status(400).send('Server error');
@@ -28,25 +27,24 @@ router.get('/:id', (req, res) => {
 // @route 	 POST api/food-menu
 // @desc 	 Create new food menu
 // @access 	 Private
-router.post('/:id', aAuth, async (req, res) => {
-    const { name, category, description, price } = req.body;
-
+router.post('/', auth, async (req, res) => {
+    const { name, category, description, price, orderDetails  } = req.body;
     try {
-        
-        let foodMenu = await FoodMenu.findById(req.params.id);
+        // @todo validate that promo exists (after dispatch this project this tuesday xd)   
+        const user = req.user.id;
 
-        if(!foodMenu) {
-            return res.json({ msg: 'La promoción no ha sido encontrada' });
-        }
-
-        foodMenu = await FoodMenu.create({
+        let foodOrder = await FoodOrder.create({
+            user,
             name,
             category,
             description,
-            price
+            price,
+            orderDetails
         })
 
-        return res.json(foodMenu);
+        console.log(foodOrder);
+
+        return res.json(foodOrder);
     } catch (err) {
         console.error(err.msg);
         res.status(400).send('Server error');
@@ -56,7 +54,7 @@ router.post('/:id', aAuth, async (req, res) => {
 // @route 	 PUT api/food-menu/:id
 // @desc 	 Update Menu
 // @access 	 Private
-router.put('/:id', adminAuth, async (req, res) => {
+router.put('/:id', auth, async (req, res) => {
     const { name, category, description, price } = req.body;
 
     const menuFields = {};
@@ -82,7 +80,7 @@ router.put('/:id', adminAuth, async (req, res) => {
 // @route 	 DELETE api/food-menu/:id
 // @desc 	 Remove Menu
 // @access 	 Private
-router.delete('/:id', adminAuth, async (req, res) => {
+router.delete('/:id', auth, async (req, res) => {
     try {
         let foodMenu = await FoodMenu.findById(req.params.id);
 
