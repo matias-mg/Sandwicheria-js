@@ -1,5 +1,4 @@
 import React, { useReducer } from 'react';
-import uuid from 'uuid';
 import FoodOrderContext from './foodOrderContext';
 import foodOrderReducer from './foodOrderReducer';
 import { ADD_FOODORDER, CANCEL_FOODORDER } from '../types';

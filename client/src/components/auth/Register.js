@@ -1,16 +1,31 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import AlertContext from '../../context/alert/alertContext';
+import AuthContext from '../../context/auth/authContext';
 
-const Register = () => {
+const Register = (props) => {
     const alertContext = useContext(AlertContext);
+    const authContext = useContext(AuthContext);
 
-    const { setAlert } = alertContext
+    const { setAlert } = alertContext;
+
+    const { register, error, clearErrors, isAuthenticated } = authContext;
+
     const [user, setUser] = useState({
         name: '',
         email: '',
         password: '',
         password2: ''
     })
+
+    useEffect(() => {
+        if(isAuthenticated) {
+            props.history.push('/');
+        }
+        if (error === 'El correo ingresado se encuentra en uso') {
+            setAlert(error, 'danger')
+            clearErrors();
+        }
+    }, [error, isAuthenticated, props.history])
 
     const { name, email, password, password2 } = user;
 
@@ -27,8 +42,13 @@ const Register = () => {
             setAlert('Contraseña debe contener 6 carácteres como mínimo', 'danger')
         } else if (password !== password2) {
             setAlert('Las contraseñas no coinciden', 'danger')
+        } else {
+            register({
+                name,
+                email,
+                password
+            })
         }
-        console.log('Register miau');
     }
 
     return (

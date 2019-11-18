@@ -11,8 +11,13 @@ import FoodMenuState from './context/foodmenu/FoodMenuState';
 import FoodOrderState from './context/foodorder/FoodOrderState'
 import AuthState from './context/auth/authState';
 import AlertState from './context/alert/AlertState';
+import setAuthToken from './utilities/setAuthToken';
 
 import './App.css';
+
+if(localStorage.token) {
+  setAuthToken(localStorage.token)
+}
 
 const App = () => {
   return (
