@@ -9,10 +9,6 @@ const FoodOrderSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    category: {
-        type: String,
-        required: true
-    },
     description: {
         type: String,
         required: true
@@ -22,13 +18,12 @@ const FoodOrderSchema = mongoose.Schema({
         required: true,
         min: [1, 'Precio debe ser mayor a 0']
     },
-    quantity: {
-        type: Number,
-        required: true,
-        min: [1, 'Cantidad debe ser mayor a 0']
-    },
-    details: {
+    orderDetails: {
         type: String
+    },
+    status: {
+        type: String,
+        default: 'En espera'
     },
     date: {
         type: Date,
