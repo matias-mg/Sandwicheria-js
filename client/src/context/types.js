@@ -1,0 +1,26 @@
+// Food menus
+export const ADD_FOODMENU = 'ADD_FOODMENU';
+export const DELETE_FOODMENU = 'DELETE_FOODMENU';
+export const SET_CURRENT = 'SET_CURRENT';
+export const CLEAR_CURRENT = 'CLEAR_CURRENT';
+export const UPDATE_FOODMENU = 'UPDATE_FOODMENU';
+export const FILTER_FOODMENU = 'FILTER_FOODMENU';
+export const CLEAR_FILTER = 'CLEAR_FILTER';
+
+// Alerts
+export const SET_ALERT = 'SET_ALERT';
+export const REMOVE_ALERT = 'REMOVE_ALERT';
+
+// Auth
+export const REGISTER_SUCESS = 'REGISTER_SUCESS';
+export const REGISTER_FAIL = 'REGISTER_FAIL';
+export const USER_LOADED = 'USER_LOADED';
+export const AUTH_ERROR = 'AUTH_ERROR';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_FAIL = 'LOGIN_FAIL';
+export const LOGOUT = 'LOGOUT';
+export const CLEAR_ERRORS = 'CLEAR_ERRORS';
+
+// Food orders
+export const ADD_FOODORDER = 'ADD_FOODORDER';
+export const CANCEL_FOODORDER = 'CANCEL_FOODORDER';

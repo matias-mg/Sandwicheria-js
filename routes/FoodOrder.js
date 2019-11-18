@@ -1,10 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { check, validationResult } = require('express-validator');
 
 const FoodMenu = require('../models/FoodMenu');
 const auth = require('../middleware/auth');
-const adminAuth = require('../middleware/adminAuth');
 const User = require('../models/User');
 
 // @route 	 GET api/food-menu
@@ -30,25 +28,15 @@ router.get('/:id', (req, res) => {
 // @route 	 POST api/food-menu
 // @desc 	 Create new food menu
 // @access 	 Private
-router.post('/', [adminAuth, [
-    check('name', 'Se requiere un nombre de promoción').not().isEmpty(),
-    check('category', 'Seleccione la categoría de la promoción').exists(),
-    check('description', 'Se requiere una descripción de la promoción').not().isEmpty(),
-    check('price', 'Ingrese el precio de la promoción').exists()
-]], async (req, res) => {
-    // Check errors
-    const errors = validationResult(req);
-    if(!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
-    }
-
+router.post('/:id', aAuth, async (req, res) => {
     const { name, category, description, price } = req.body;
 
     try {
-        // Check if food menu exists
-        let foodMenu = await FoodMenu.findOne({ name });
-        if(foodMenu) {
-            return res.json({ msg: 'El nombre de la promoción ya existe' });
+        
+        let foodMenu = await FoodMenu.findById(req.params.id);
+
+        if(!foodMenu) {
+            return res.json({ msg: 'La promoción no ha sido encontrada' });
         }
 
         foodMenu = await FoodMenu.create({
