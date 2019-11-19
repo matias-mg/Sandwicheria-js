@@ -17,7 +17,19 @@ const Navbar = () => {
 
     const authLinks = (
         <Fragment>
-            <li>¡Hola {user && user.name}!</li>
+            {user && user.userType === 0 ? 
+                <li>¡Hola {user && user.name}!</li>
+                :
+                <li>
+                <a href="#!">
+                    Ordenes
+                </a>
+                <a href="#!">
+                    Administración
+                </a>
+            </li>
+            }
+            
             <li>
                 <a href="#!" onClick={onLogout}>
                     <i className="fas fa-sign-out-alt"></i><span className="hide-sm"> Cerrar Sesión</span>

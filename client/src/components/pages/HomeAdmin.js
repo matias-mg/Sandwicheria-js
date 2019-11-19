@@ -1,6 +1,5 @@
 import React, { useContext, useEffect } from 'react';
 import FoodMenus from '../foodMenu/FoodMenus';
-import FoodOrders from '../foodMenu/client/FoodOrders';
 import AuthContext from '../../context/auth/authContext';
 import FoodMenuForm from '../../components/foodMenu/admin/FoodMenuForm';
 
@@ -19,7 +18,7 @@ function Home() {
             </div>
             <div>
                 <h2>Control de Promociones</h2>
-                {/* <FoodMenuForm /> */}
+                <FoodMenuForm />
             </div>
         </div>
     )

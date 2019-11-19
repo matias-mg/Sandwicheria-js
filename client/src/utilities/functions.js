@@ -1,7 +1,7 @@
 export const foodCategory = (category) => {
     if (category === 'Sushi') {
         return 'fas fa-fish';
-    } else if (category === 'Completos') {
+    } else if (category === 'Completo') {
         return 'fas fa-hotdog';
     } else if (category === 'Sandwich') {
         return 'fas fa-hamburger';
@@ -13,7 +13,7 @@ export const foodCategory = (category) => {
 export const badgeColor = (category) => {
     if (category === 'Sushi') {
         return 'badge-sushi';
-    } else if (category === 'Completos') {
+    } else if (category === 'Completo') {
         return 'badge-hotdog';
     } else if (category === 'Sandwich') {
         return 'badge-orange';

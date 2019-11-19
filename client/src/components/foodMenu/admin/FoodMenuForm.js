@@ -1,54 +1,72 @@
-// import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import FoodMenuContext from '../../../context/foodmenu/foodMenuContext';
 
-// const FoodMenuForm = () => {
-//   const [foodMenu, setFoodMenu] = useState({
-//     name: '',
-//     category: '',
-//     description: '',
-//     price: 1
-//   });
+const FoodMenuForm = () => {
+    const foodMenuContext = useContext(FoodMenuContext);
+    const { current, addFoodMenu, updateFoodMenu, clearCurrent } = foodMenuContext;
 
-//   const { name, category, description, price } = foodMenu;
+    useEffect(() => {
+        if(current !== null) {
+            setFoodMenu(current);
+        } else {
+            setFoodMenu({
+                category: '',
+                name: '',
+                description: '',
+                price: ''
+            })
+        }
+    }, [current, foodMenuContext]);
 
-//   return (
-//     <form onSubmit={onSubmit}>
-//       <h2 className='text-primary'>{current ? 'Edit Contact' : 'Add Contact'}</h2>
-//       <input type='text' placeholder='Name' name='name' value={name} onChange={onChange} />
-//       <input type='email' placeholder='Email' name='email' value={email} onChange={onChange} />
-//       <input type='text' placeholder='Phone' name='phone' value={phone} onChange={onChange} />
-//       <h5>Contact Type</h5>
-//       <input
-//         type='radio'
-//         name='type'
-//         value='personal'
-//         checked={type === 'personal'}
-//         onChange={onChange}
-//       />{' '}
-//       Personal{' '}
-//       <input
-//         type='radio'
-//         name='type'
-//         value='professional'
-//         checked={type === 'professional'}
-//         onChange={onChange}
-//       />{' '}
-//       Professional
-//       <div>
-//         <input
-//           type='submit'
-//           value={current ? 'Update Contact' : 'Add Contact'}
-//           className='btn btn-primary btn-block'
-//         />
-//       </div>
-//       {current && (
-//         <div>
-//           <button className='btn btn-light btn-block' onClick={clearAll}>
-//             Clear
-//           </button>
-//         </div>
-//       )}
-//     </form>
-//   );
-// };
+    const [foodMenu, setFoodMenu] = useState({
+        category: '',
+        name: '',
+        description: '',
+        price: ''
+    });
 
-// export default FoodMenuForm;
+    const { name, category, description, price } = foodMenu;
+
+    const onSubmit = e => {
+        e.preventDefault();
+
+        if (current !== null) {
+            updateFoodMenu(foodMenu);
+        } else {
+            addFoodMenu(foodMenu)
+        }
+
+        clearAll();
+    }
+
+    const onChange = e => {
+        setFoodMenu({ ...foodMenu, [e.target.name]: e.target.value });
+    }
+
+    const clearAll = () => {
+        clearCurrent();
+    }
+
+    return (
+        <form onSubmit={onSubmit} className="bg-order card">
+            <h2 className='text-primary mb-1'>{current ? 'Edit Contact' : 'Añadir promoción'}</h2>
+            <h4>Tipo de promoción</h4>
+            <input type='radio' name='category' value='Sushi' checked={category === 'Sushi'} onChange={onChange}/>{' '} Sushi{' '}
+            <input type='radio' name='category' value='Completo' checked={category === 'Completo'} onChange={onChange} />{' '} Completo{' '}
+            <input type='radio' name='category' value='Sandwich' checked={category === 'Sandwich'} onChange={onChange} />{' '} Sandwich
+            <input type='text' placeholder='Nombre de promoción' name='name' value={name} onChange={onChange} />
+            <input type='text' placeholder='Descripción' name='description' value={description} onChange={onChange} />
+            <input type='number' placeholder='Precio' name='price' value={price} onChange={onChange} />
+            <div>
+                <input type='submit' value={current ? 'Update Contact' : 'Añadir promoción'} className='btn btn-primary btn-block btn-form'/>
+            </div>
+            {current && (
+                <div>
+                    <button className='btn btn-light btn-block' onClick={clearAll}>Clear</button>
+                </div>
+            )}
+        </form>
+    );
+};
+
+export default FoodMenuForm;

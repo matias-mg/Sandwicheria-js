@@ -27,7 +27,7 @@ function FoodMenuItem({ foodMenu }) {
                     </li>
                     <li><p className="price">$ {price.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}</p></li>
                 </ul>
-                <Link to="/register"><button className="btn btn-primary">Ver + detalles</button></Link>
+                <button className="btn btn-primary">Ver + detalles</button>
                 <button className="btn btn-secondary" onClick={addOrder} >Ordenar promoción</button>
             </div>
             <div>

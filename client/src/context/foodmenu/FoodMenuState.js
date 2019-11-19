@@ -55,7 +55,7 @@ const FoodMenuState = props => {
     } catch (err) {
       dispatch({
         type: FOODMENU_ERROR,
-        payload: err.response.msg
+        payload: err.response
       });
     }
   };
@@ -78,7 +78,7 @@ const FoodMenuState = props => {
     } catch (err) {
       dispatch({
         type: FOODMENU_ERROR,
-        payload: err.response.msg
+        payload: err.response
       });
     }
   };
@@ -95,7 +95,7 @@ const FoodMenuState = props => {
     } catch (err) {
       dispatch({
         type: FOODMENU_ERROR,
-        payload: err.response.msg
+        payload: err.response
       });
     }
   };
@@ -118,7 +118,7 @@ const FoodMenuState = props => {
     } catch (err) {
       dispatch({
         type: FOODMENU_ERROR,
-        payload: err.response.msg
+        payload: err.response
       });
     }
   };

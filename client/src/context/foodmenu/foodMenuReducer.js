@@ -19,7 +19,7 @@ export default (state, action) => {
     case ADD_FOODMENU:
       return {
         ...state,
-        foodMenus: [action.payload, ...state.contacts],
+        foodMenus: [action.payload, ...state.foodMenus],
         loading: false
       };
     case UPDATE_FOODMENU:

@@ -10,12 +10,10 @@ function FoodMenuItem({ foodMenu }) {
 
   const foodMenuContext = useContext(FoodMenuContext);
 
-  const deleteOrder = () => {
-    foodMenuContext.deleteFoodMenu(_id);
-  };
+  const { addOrder, deleteFoodMenu, setCurrent } = foodMenuContext;
 
-  const addOrder = () => {
-    foodMenuContext.addOrder(foodMenu);
+  const deleteOrder = () => {
+    deleteFoodMenu(_id);
   };
 
   return (
@@ -33,9 +31,7 @@ function FoodMenuItem({ foodMenu }) {
             <p className='price'>$ {price.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.')}</p>
           </li>
         </ul>
-        <Link to='/register'>
-          <button className='btn btn-primary'>Editar</button>
-        </Link>
+        <button className='btn btn-primary' onClick={() => setCurrent(foodMenu)}>Editar</button>
         <button className='btn btn-secondary' onClick={deleteOrder}>
           Eliminar
         </button>

@@ -13,18 +13,20 @@ function FoodOrders() {
         // eslint-disabled-next-line
     }, [])
 
+    if (foodOrders !== null && foodOrders.length === 0  && !loading) {
+        return <h4 className="card bg-order text-center text-dark">No tienes ningún pedido en espera...</h4>
+    }
+
     return (
         <Fragment>
             {foodOrders !== null && !loading ? (
                 <TransitionGroup>
-                    {foodOrders.length > 0 ?
+                    {foodOrders.length > 0 &&
                         foodOrders.map(foodOrder =>
                             <CSSTransition key={foodOrder._id} timeout={500} classNames="item" >
                                 <FoodOrderItem foodOrder={foodOrder} />
                             </CSSTransition>)
-                        :
-                            <h4 className="card bg-order text-center text-dark">No tienes ningún pedido en espera...</h4>
-                        }
+                    }
                 </TransitionGroup>
             ) : <Spinner />}
 
