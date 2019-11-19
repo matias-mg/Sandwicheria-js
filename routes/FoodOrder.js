@@ -9,7 +9,7 @@ const auth = require('../middleware/auth');
 // @access 	 Private
 router.get('/', auth, async (req, res) => {
     try {
-        const foodOrder = await FoodOrder.find().sort({ date: -1 });
+        const foodOrder = await FoodOrder.find({ user: req.user.id }).sort({ date: -1 });
         res.json(foodOrder);
     } catch (err) {
         console.error(err.msg);
@@ -77,16 +77,16 @@ router.put('/:id', auth, async (req, res) => {
     }
 })
 
-// @route 	 DELETE api/food-menu/:id
-// @desc 	 Remove Menu
+// @route 	 DELETE api/food-order/:id
+// @desc 	 Remove Order
 // @access 	 Private
 router.delete('/:id', auth, async (req, res) => {
     try {
-        let foodMenu = await FoodMenu.findById(req.params.id);
+        let foodOrder = await FoodOrder.findById(req.params.id);
 
-        if(!foodMenu) return res.status(404).json({ msg: 'El menú no ha sido encontrado'});
+        if(!foodOrder) return res.status(404).json({ msg: 'El menú no ha sido encontrado'});
 
-        await FoodMenu.findByIdAndRemove(req.params.id);
+        await FoodOrder.findByIdAndRemove(req.params.id);
         
         res.json({ msg: 'Menú eliminado exitosamente'});
     } catch (err) {

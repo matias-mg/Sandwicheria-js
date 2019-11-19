@@ -27,7 +27,7 @@ const FoodOrderSchema = mongoose.Schema({
     },
     status: {
         type: String,
-        default: 'En espera'
+        default: 'en espera'
     },
     date: {
         type: Date,

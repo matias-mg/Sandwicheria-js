@@ -17,13 +17,13 @@ export default (state, action) => {
         case ADD_FOODORDER:
             return {
                 ...state,
-                foodOrders: [...state.foodOrders, action.payload],
+                foodOrders: [action.payload, ...state.foodOrders],
                 loading: false
             }
         case CANCEL_FOODORDER:
             return {
                 ...state,
-                foodOrders: state.foodOrders.filter(order => (order.id != action.payload)),
+                foodOrders: state.foodOrders.filter(order => (order._id != action.payload)),
                 loading: false
             }
         case CLEAR_FOODORDERS:

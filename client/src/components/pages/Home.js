@@ -13,9 +13,11 @@ function Home() {
     return (
         <div className="grid-2 mt-1">
             <div>
+                <h2>Promociones Disponibles</h2>
                 <FoodMenus />
             </div>
             <div>
+                <h2>Tus Pedidos</h2>
                 <FoodOrders />
             </div>
         </div>

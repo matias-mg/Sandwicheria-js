@@ -18,7 +18,7 @@ const FoodOrderState = props => {
 
     const [state, dispatch] = useReducer(foodOrderReducer, initialState);
 
-    // Get Food orders
+    // Get All Food orders
     const getFoodOrders = async () => {
         try {
             const res = await axios.get('/api/food-order');
@@ -30,7 +30,7 @@ const FoodOrderState = props => {
         } catch (err) {
             dispatch({
                 type: FOODORDER_ERROR,
-                payload: err.response.msg
+                payload: err.response
             });
         }
     }
@@ -59,8 +59,20 @@ const FoodOrderState = props => {
     }
 
     // Cancel food order
-    const cancelOrder = (id) => {
-        dispatch({ type: CANCEL_FOODORDER, payload: id });
+    const cancelOrder = async (id) => {
+        try {
+            const res = await axios.delete(`/api/food-order/${id}`);
+            
+            dispatch({ 
+                type: CANCEL_FOODORDER, 
+                payload: id 
+            });
+        } catch (err) {
+            dispatch({
+                type: FOODORDER_ERROR,
+                payload: err.response.msg
+            });
+        }
     }
 
     // Clear food orders after logout

@@ -5,12 +5,12 @@ import FoodOrderContext from '../../../context/foodorder/foodOrderContext';
 import PropTypes from 'prop-types';
 
 function FoodOrderItem({ foodOrder }) {
-    const { id, name, category, description, price, status, orderDetails } = foodOrder;
+    const { _id, name, category, description, price, status, orderDetails } = foodOrder;
 
     const foodOrderContext = useContext(FoodOrderContext);
 
     const cancelOrder = () => {
-        foodOrderContext.cancelOrder(id);
+        foodOrderContext.cancelOrder(_id);
     }
     return (
         <div className="card bg-order">
