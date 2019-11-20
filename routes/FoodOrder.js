@@ -49,8 +49,6 @@ router.post('/', auth, async (req, res) => {
             orderDetails
         })
 
-        console.log(foodOrder);
-
         return res.json(foodOrder);
     } catch (err) {
         console.error(err.msg);
@@ -58,29 +56,28 @@ router.post('/', auth, async (req, res) => {
     }
 })
 
-// @route 	 PUT api/food-menu/:id
+// @route 	 PATCH api/food-menu/:id
 // @desc 	 Update Menu
 // @access 	 Private
 router.put('/:id', auth, async (req, res) => {
-    const { name, category, description, price } = req.body;
-
-    const menuFields = {};
-    if(name) menuFields.name = name;
-    if(category) menuFields.category = category;
-    if(description) menuFields.description = description;
-    if(price) menuFields.price = price;
-
     try {
-        let foodMenu = await FoodMenu.findById(req.params.id);
+        const foodOrder = await FoodOrder.findById(req.params.id)
+        let newStatus;
 
-        if(!foodMenu) return res.status(404).json({ msg: 'El menú no ha sido encontrado'});
+        const { status } = foodOrder;
+        if(status === 'en espera') newStatus = 'en preparacion';
+        if(status === 'en preparacion') newStatus = 'lista para retirar';
+        if(status === 'lista para retirar') newStatus = 'finalizado';
 
-        foodMenu = await FoodMenu.findByIdAndUpdate(req.params.id, { $set: menuFields }, { new: true });
+        foodOrder.status = newStatus;
+
+        await foodOrder.save();
+
+        return res.json(foodOrder);
         
-        res.json(foodMenu);
     } catch (err) {
-        console.error(err.msg);
-        res.status(500).send('Server error');
+        console.error(err);
+        res.status(400).send('Server error');
     }
 })
 
@@ -92,6 +89,10 @@ router.delete('/:id', auth, async (req, res) => {
         let foodOrder = await FoodOrder.findById(req.params.id);
 
         if(!foodOrder) return res.status(404).json({ msg: 'El menú no ha sido encontrado'});
+
+        if(foodOrder.status !== 'en espera') {
+            return res.status(400).json({ msg: 'No se puede eliminar una orden en proceso o finalizada' }); 
+        }
 
         await FoodOrder.findByIdAndRemove(req.params.id);
         

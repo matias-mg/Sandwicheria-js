@@ -14,29 +14,7 @@ import {
 
 const FoodMenuState = props => {
   const initialState = {
-    foodMenus: [
-    //   {
-    //     _id: 1,
-    //     name: 'Promo Sushi',
-    //     category: 'Sushi',
-    //     description: 'Rico sushi de 40 piezas + bebida de 2 litros.',
-    //     price: 12000
-    //   },
-    //   {
-    //     _id: 2,
-    //     name: 'Promo Completo',
-    //     category: 'Completos',
-    //     description: 'Rico completo italiano + bebida de 1 litro.',
-    //     price: 4000
-    //   },
-    //   {
-    //     _id: 3,
-    //     name: 'Promo Sandwich',
-    //     category: 'Sandwich',
-    //     description: 'Rico Sandwich a lo pobre + bebida en lata.',
-    //     price: 5000
-    //   }
-    ],
+    foodMenus: [],
     current: null,
     error: null
   };

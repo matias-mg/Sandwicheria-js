@@ -3,7 +3,7 @@ import FoodMenus from '../foodMenu/FoodMenus';
 import AuthContext from '../../context/auth/authContext';
 import FoodMenuForm from '../foodMenu/admin/FoodMenuForm';
 
-function Home() {
+function FoodMenusPanel() {
   const authContext = useContext(AuthContext);
 
   const { loadUser } = authContext;
@@ -27,4 +27,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default FoodMenusPanel;

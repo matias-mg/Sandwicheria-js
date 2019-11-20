@@ -15,7 +15,7 @@ function FoodMenus() {
     
     useEffect(() => {
         getFoodMenus();
-        authContext.loadUser()
+        authContext.loadUser();
         // eslint-disable-next-line
     }, [])
 
@@ -25,7 +25,7 @@ function FoodMenus() {
                 <TransitionGroup>
                     {foodMenus.length > 0 && !loading ?
                         user &&  
-                        foodMenus.map(foodMenu => <CSSTransition key={foodMenu.id} classNames="item" timeout={500} >
+                        foodMenus.map(foodMenu => <CSSTransition key={foodMenu._id} classNames="item" timeout={500} >
                             <FoodMenuItem foodMenu={foodMenu} />
                         </CSSTransition>)
                         :

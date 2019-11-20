@@ -7,7 +7,8 @@ import {
     CANCEL_FOODORDER,
     FOODORDER_ERROR,
     GET_FOODORDERS,
-    CLEAR_FOODORDERS
+    CLEAR_FOODORDERS,
+    UPDATE_FOODORDER
 } from '../types';
 
 const FoodOrderState = props => {
@@ -75,6 +76,23 @@ const FoodOrderState = props => {
         }
     }
 
+    // Update food order
+    const updateFoodOrder = async id => {
+        const res = await axios.put(`/api/food-order/${id}`)
+
+        try {
+            dispatch({
+                type: UPDATE_FOODORDER,
+                payload: res.data
+            })
+        } catch (err) {
+            dispatch({
+                type: FOODORDER_ERROR,
+                payload: err.response.data.msg
+            })   
+        }
+    };
+
     // Clear food orders after logout
     const clearOrders = () => {
         dispatch({
@@ -89,7 +107,8 @@ const FoodOrderState = props => {
             addOrder,
             cancelOrder,
             getFoodOrders,
-            clearOrders
+            clearOrders,
+            updateFoodOrder
         }}>
             {props.children}
         </FoodOrderContext.Provider>

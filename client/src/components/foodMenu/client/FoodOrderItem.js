@@ -11,12 +11,10 @@ function FoodOrderItem({ foodOrder }) {
     const authContext = useContext(AuthContext);
 
     const { user } = authContext;
+    const { updateFoodOrder, cancelOrder } = foodOrderContext;
 
-    const cancelOrder = () => {
-        foodOrderContext.cancelOrder(_id);
-    }
     return (
-        <div className="card bg-order">
+        <div className="card bg-order-secondary">
             <span className={'badge ' + badgeColor(category)}>
                 <i className={foodCategory(category)}></i> <span>{category}</span>
             </span>
@@ -39,19 +37,14 @@ function FoodOrderItem({ foodOrder }) {
                     <li>
                         <p className="price text-primary">Total: {<span className="text-success"> $ {price.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}</span>}</p>
                     </li>
-                    {/* {orderDetails && (<li>
-                        <p className="text-primary">
-                            Detalles: <span className="badge badge-details badge-light-gray">{orderDetails}</span>
-                        </p>
-                    </li>)} */}
                 </span>
             </ul>
             {user && user.userType === 0 ?
-            <button className="btn btn-danger center-x" onClick={cancelOrder}>Cancelar pedido</button>
+            <button className="btn btn-danger center-x" onClick={() => cancelOrder(_id)}>Cancelar pedido</button>
             :
             <div>
-            <button className="btn btn-success">Aceptar pedido</button>
-            <button className="btn btn-danger" >Rechazar pedido</button>
+            <button className="btn btn-success" onClick={() => updateFoodOrder(_id)}>Aceptar pedido</button>
+            <button className="btn btn-danger" onClick={() => cancelOrder(_id)}>Rechazar pedido</button>
             </div>
             }
         </div>

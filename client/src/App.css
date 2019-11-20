@@ -85,6 +85,22 @@ h1, h2, h3 {
   color: #444;
 }
 
+.history {
+  display: flex;
+  color: #efefef;
+  justify-content: space-around;
+}
+
+.history h2 {
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+}
+
+.history .active {
+  border-bottom: 2px solid white;
+  transition: all 0.5s ease-in-out;
+}
+
 /* Text Styles*/
 .x-large {
   font-size: 4rem;
@@ -121,6 +137,10 @@ h1, h2, h3 {
 
 .text-dark {
   color: var(--dark-color);
+}
+
+.text-danger {
+  color: var(--danger-color);
 }
 
 .text-gray {
@@ -286,6 +306,7 @@ h1, h2, h3 {
   grid-gap: 2rem;
 }
 
+/* Buttons - Badges - Etc */
 .btn {
   display: inline-block;
   background: var(--light-color);
@@ -361,16 +382,6 @@ h1, h2, h3 {
   background: var(--light-color);
 }
 
-/* .bg-order:hover {
-  background: var(--danger-color);
-} */
-
-/* .bg-order:hover .text-gray,
-.bg-order:hover .price,
-.bg-order:hover .text-primary {
-  color: #efefef;
-} */
-
 .alert {
   padding: 0.7rem;
   margin: 1rem auto;
@@ -379,6 +390,13 @@ h1, h2, h3 {
   color: #333;
   width: 70%;
   text-align: center;
+}
+
+.spinner {
+  width: 100px;
+  height: 100px;
+  margin: 5rem auto 0 auto;
+  display: block;
 }
 
 .btn-primary,
@@ -648,11 +666,15 @@ table th {
   /* Utilities */
   .alert {
     width: 100%;
-  } 
+  }
 
-  .grid-2,
-  .grid-3,
-  .grid-4 {
+  .btn {
+    display: block;
+    width: 100%;
+
+  }
+
+  .grid-2 {
     grid-template-columns: 1fr;
   }
 

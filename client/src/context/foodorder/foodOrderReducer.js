@@ -3,7 +3,8 @@ import {
     CANCEL_FOODORDER,
     FOODORDER_ERROR,
     GET_FOODORDERS,
-    CLEAR_FOODORDERS
+    CLEAR_FOODORDERS,
+    UPDATE_FOODORDER
 } from '../types';
 
 export default (state, action) => {
@@ -24,6 +25,13 @@ export default (state, action) => {
             return {
                 ...state,
                 foodOrders: state.foodOrders.filter(order => (order._id !== action.payload)),
+                loading: false
+            }
+        case UPDATE_FOODORDER:
+            return {
+                ...state,
+                foodOrders: state.foodOrders.map(order => 
+                    order._id === action.payload._id ? action.payload : order),
                 loading: false
             }
         case CLEAR_FOODORDERS:

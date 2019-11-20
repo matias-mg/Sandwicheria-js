@@ -30,8 +30,8 @@ export const statusColor = (status) => {
         return 'text-secondary bold';
     } else if (status === 'lista para retirar') {
         return 'text-success bold';
-    } else if (status === 'entregada') {
-        return 'text-sandwich bold';
+    } else if (status === 'finalizado') {
+        return 'text-danger bold';
     } else {
         return 'text-dark bold';
     }
