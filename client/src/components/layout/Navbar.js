@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import AuthContext from '../../context/auth/authContext';
 import FoodOrderContext from '../../context/foodorder/foodOrderContext';
 
-const Navbar = () => {
+const Navbar = (props) => {
   const authContext = useContext(AuthContext);
   const foodOrderContext = useContext(FoodOrderContext);
 
@@ -29,7 +29,7 @@ const Navbar = () => {
       <li>
         <a href='#!' onClick={onLogout}>
           <i className='fas fa-sign-out-alt'></i>
-          <span className='hide-sm'> Cerrar Sesión</span>
+          <Link to="/login">Cerrar Sesión</Link>
         </a>
       </li>
     </Fragment>

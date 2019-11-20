@@ -12,11 +12,11 @@ const FoodMenuItem = ({ foodMenu }) => {
     const imageFood = (category) => {
         switch (category) {
             case 'Sushi':
-                return <img src={sushi} alt={category} />
+                return <img src={sushi} className="hide-sm" alt={category} />
             case 'Completo':
-                return <img src={completo} alt={category} />
+                return <img src={completo} className="hide-sm" alt={category} />
             case 'Sandwich':
-                return <img src={sandwich} alt={category} />
+                return <img src={sandwich} className="hide-sm" alt={category} />
             default:
                 return;
         }
@@ -51,7 +51,7 @@ const FoodMenuItem = ({ foodMenu }) => {
                     <li>
                         <p className="text-gray">{description}</p>
                     </li>
-                    <li><p className="price">$ {price.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}</p></li>
+                    <li><p className="price">Precio: <span className="text-success">$ {price.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}</span></p></li>
                 </ul>
                 {user && user.userType === 0 ?
                 <div>

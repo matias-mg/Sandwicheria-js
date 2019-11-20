@@ -10,7 +10,7 @@ function FoodOrders() {
 
     useEffect(() => {
         getFoodOrders();
-        // eslint-disabled-next-line
+        // eslint-disable-next-line
     }, [])
 
     if (foodOrders !== null && foodOrders.length === 0  && !loading) {

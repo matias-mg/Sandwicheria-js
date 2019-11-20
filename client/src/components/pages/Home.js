@@ -10,7 +10,7 @@ function Home() {
     const { user, loadUser } = authContext;
     useEffect(() => {
         loadUser()
-        // eslint-disabled-next-line
+        // eslint-disable-next-line
     }, [])
     return (
         <div className="grid-2 mt-1">

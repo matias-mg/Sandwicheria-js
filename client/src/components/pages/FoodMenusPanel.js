@@ -1,6 +1,5 @@
-import React, { Fragment, useContext, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import FoodMenus from '../foodMenu/FoodMenus';
-import FoodOrders from '../foodMenu/client/FoodOrders';
 import AuthContext from '../../context/auth/authContext';
 import FoodMenuForm from '../foodMenu/admin/FoodMenuForm';
 
@@ -11,7 +10,7 @@ function Home() {
 
   useEffect(() => {
     loadUser();
-    // eslint-disabled-next-line
+    // eslint-disable-next-line
   }, []);
   
   return (

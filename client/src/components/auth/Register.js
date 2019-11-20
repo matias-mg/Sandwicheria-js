@@ -25,6 +25,7 @@ const Register = (props) => {
             setAlert(error, 'danger')
             clearErrors();
         }
+        // eslint-disable-next-line
     }, [error, isAuthenticated, props.history])
 
     const { name, email, password, password2 } = user;
@@ -52,7 +53,7 @@ const Register = (props) => {
     }
 
     return (
-        <div className='container-auth bg-order'>
+        <div className='container-auth bg-order-secondary'>
             <h1 className="text-center text-primary">Registro de Usuario</h1>
             <form onSubmit={onSubmit}>
                 <div className="form-group">

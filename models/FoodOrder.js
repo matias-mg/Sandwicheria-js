@@ -26,9 +26,6 @@ const FoodOrderSchema = mongoose.Schema({
         required: true,
         min: [1, 'Precio debe ser mayor a 0']
     },
-    orderDetails: {
-        type: String
-    },
     status: {
         type: String,
         default: 'en espera'

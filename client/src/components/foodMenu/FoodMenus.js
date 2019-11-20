@@ -1,7 +1,6 @@
 import React, { Fragment, useContext, useEffect } from 'react'
 import FoodMenuContext from '../../context/foodmenu/foodMenuContext';
 import FoodMenuItem from './FoodMenuItem';
-import AdminFoodMenuItem from './admin/AdminFoodMenuItem';
 import AuthContext from '../../context/auth/authContext';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import Spinner from '../layout/Spinner';
@@ -17,7 +16,7 @@ function FoodMenus() {
     useEffect(() => {
         getFoodMenus();
         authContext.loadUser()
-        // eslint-disabled-next-line
+        // eslint-disable-next-line
     }, [])
 
     return (
@@ -26,7 +25,9 @@ function FoodMenus() {
                 <TransitionGroup>
                     {foodMenus.length > 0 && !loading ?
                         user &&  
-                        foodMenus.map(foodMenu => <FoodMenuItem key={foodMenu.id} foodMenu={foodMenu} />)
+                        foodMenus.map(foodMenu => <CSSTransition key={foodMenu.id} classNames="item" timeout={500} >
+                            <FoodMenuItem foodMenu={foodMenu} />
+                        </CSSTransition>)
                         :
                             <Spinner />
                         }

@@ -23,7 +23,7 @@ export default (state, action) => {
         case CANCEL_FOODORDER:
             return {
                 ...state,
-                foodOrders: state.foodOrders.filter(order => (order._id != action.payload)),
+                foodOrders: state.foodOrders.filter(order => (order._id !== action.payload)),
                 loading: false
             }
         case CLEAR_FOODORDERS:

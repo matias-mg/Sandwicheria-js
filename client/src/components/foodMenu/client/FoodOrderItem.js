@@ -5,7 +5,7 @@ import AuthContext from '../../../context/auth/authContext';
 import PropTypes from 'prop-types';
 
 function FoodOrderItem({ foodOrder }) {
-    const { _id, name, userName, category, description, price, status, orderDetails, date } = foodOrder;
+    const { _id, name, userName, category, description, price, status } = foodOrder;
 
     const foodOrderContext = useContext(FoodOrderContext);
     const authContext = useContext(AuthContext);
@@ -30,22 +30,24 @@ function FoodOrderItem({ foodOrder }) {
                     <h4 className="text-dark">Solicitante: {userName}</h4>
                 </li>
                 }
-                <li>
-                    <p className="price">Total: {<span className="text-success">$ {price.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}</span>}</p>
-                </li>
-                <li>
-                    <p className="text-primary">
-                        Estado: <span className={statusColor(status)}>{status.charAt(0).toUpperCase() + status.slice(1)}</span>
-                    </p>
-                </li>
-                {orderDetails && (<li>
-                    <p className="text-primary">
-                        Detalles: <span className="badge badge-details badge-light-gray">{orderDetails}</span>
-                    </p>
-                </li>)}
+                <span className="text-card text-card-secondary">
+                    <li>
+                        <p className="text-primary">
+                            Estado: <span className={statusColor(status)}>{status.charAt(0).toUpperCase() + status.slice(1)}</span>
+                        </p>
+                    </li>
+                    <li>
+                        <p className="price text-primary">Total: {<span className="text-success"> $ {price.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}</span>}</p>
+                    </li>
+                    {/* {orderDetails && (<li>
+                        <p className="text-primary">
+                            Detalles: <span className="badge badge-details badge-light-gray">{orderDetails}</span>
+                        </p>
+                    </li>)} */}
+                </span>
             </ul>
             {user && user.userType === 0 ?
-            <button className="btn btn-danger" onClick={cancelOrder}>Cancelar pedido</button>
+            <button className="btn btn-danger center-x" onClick={cancelOrder}>Cancelar pedido</button>
             :
             <div>
             <button className="btn btn-success">Aceptar pedido</button>
@@ -61,3 +63,17 @@ FoodOrderItem.propTypes = {
 }
 
 export default FoodOrderItem;
+
+/* <li>
+<p className="price">Total: {<span className="text-success">$ {price.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}</span>}</p>
+</li>
+<li>
+<p className="text-primary">
+    Estado: <span className={statusColor(status)}>{status.charAt(0).toUpperCase() + status.slice(1)}</span>
+</p>
+</li>
+{orderDetails && (<li>
+<p className="text-primary">
+    Detalles: <span className="badge badge-details badge-light-gray">{orderDetails}</span>
+</p>
+</li>)} */

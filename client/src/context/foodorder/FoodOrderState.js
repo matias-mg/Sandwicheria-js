@@ -61,7 +61,7 @@ const FoodOrderState = props => {
     // Cancel food order
     const cancelOrder = async (id) => {
         try {
-            const res = await axios.delete(`/api/food-order/${id}`);
+            await axios.delete(`/api/food-order/${id}`);
             
             dispatch({ 
                 type: CANCEL_FOODORDER, 

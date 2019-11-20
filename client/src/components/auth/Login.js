@@ -43,7 +43,7 @@ const Login = (props) => {
     }
 
     return (
-        <div className='container-auth bg-order'>
+        <div className='container-auth bg-order-secondary'>
             <h1 className="text-center text-primary">Inicio de Sesión</h1>
             <form onSubmit={onSubmit}>
                 <div className="form-group">
