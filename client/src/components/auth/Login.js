@@ -14,10 +14,12 @@ const Login = (props) => {
         if(isAuthenticated) {
             props.history.push('/');
         }
+
         if (error === 'Credenciales incorrectas' || error === 'Contraseña incorrecta') {
             setAlert(error, 'danger')
             clearErrors();
         }
+        // eslint-disable-next-line
     }, [error, isAuthenticated, props.history])
 
     const [user, setUser] = useState({
@@ -35,8 +37,9 @@ const Login = (props) => {
         e.preventDefault();
         if (email === '' || password === '') {
             setAlert('Por favor, complete todos los campos', 'danger');
+        } else {
+            login({ email, password });
         }
-        login({ email, password });
     }
 
     return (

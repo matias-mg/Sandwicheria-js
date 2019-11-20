@@ -28,11 +28,11 @@ function Home() {
             :
             <Fragment className="grid-2">
                 <div>
-                    <h2>Promociones Vigentes</h2>
-                    <FoodMenus />
+                    <h2>Pedidos Pendientes</h2>
+                    <FoodOrders />
                 </div>
                 <div>
-                    <h2>Control de Promociones</h2>
+                    <h2>Control de Pedidos</h2>
                     <FoodMenuForm />
                 </div>
             </Fragment>

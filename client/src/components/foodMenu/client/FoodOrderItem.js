@@ -1,13 +1,16 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
 import { badgeColor, foodCategory, statusColor } from '../../../utilities/functions';
 import FoodOrderContext from '../../../context/foodorder/foodOrderContext';
+import AuthContext from '../../../context/auth/authContext';
 import PropTypes from 'prop-types';
 
 function FoodOrderItem({ foodOrder }) {
-    const { _id, name, category, description, price, status, orderDetails } = foodOrder;
+    const { _id, name, userName, category, description, price, status, orderDetails, date } = foodOrder;
 
     const foodOrderContext = useContext(FoodOrderContext);
+    const authContext = useContext(AuthContext);
+
+    const { user } = authContext;
 
     const cancelOrder = () => {
         foodOrderContext.cancelOrder(_id);
@@ -22,8 +25,13 @@ function FoodOrderItem({ foodOrder }) {
                 <li>
                     <p className="text-gray">{description}</p>
                 </li>
+                {user && user.userType === 1 && userName &&
                 <li>
-                    <p className="price">Total: $ {price.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}</p>
+                    <h4 className="text-dark">Solicitante: {userName}</h4>
+                </li>
+                }
+                <li>
+                    <p className="price">Total: {<span className="text-success">$ {price.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}</span>}</p>
                 </li>
                 <li>
                     <p className="text-primary">
@@ -36,7 +44,14 @@ function FoodOrderItem({ foodOrder }) {
                     </p>
                 </li>)}
             </ul>
+            {user && user.userType === 0 ?
             <button className="btn btn-danger" onClick={cancelOrder}>Cancelar pedido</button>
+            :
+            <div>
+            <button className="btn btn-success">Aceptar pedido</button>
+            <button className="btn btn-danger" >Rechazar pedido</button>
+            </div>
+            }
         </div>
     )
 }

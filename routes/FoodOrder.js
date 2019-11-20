@@ -9,8 +9,13 @@ const auth = require('../middleware/auth');
 // @access 	 Private
 router.get('/', auth, async (req, res) => {
     try {
-        const foodOrder = await FoodOrder.find({ user: req.user.id }).sort({ date: -1 });
-        res.json(foodOrder);
+        if (req.user.userType === 0 ) {
+            const foodOrder = await FoodOrder.find({ user: req.user.id }).sort({ date: -1 });
+            res.json(foodOrder);
+        } else if (req.user.userType === 1) {
+            const foodOrder = await FoodOrder.find().sort({ date: -1 });
+            res.json(foodOrder);
+        }
     } catch (err) {
         console.error(err.msg);
         res.status(400).send('Server error');
@@ -32,9 +37,11 @@ router.post('/', auth, async (req, res) => {
     try {
         // @todo validate that promo exists (after dispatch this project this tuesday xd)   
         const user = req.user.id;
+        const userName = req.user.name;
 
         let foodOrder = await FoodOrder.create({
             user,
+            userName,
             name,
             category,
             description,

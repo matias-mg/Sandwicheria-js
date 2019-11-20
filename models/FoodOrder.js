@@ -5,6 +5,10 @@ const FoodOrderSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'users'
     },
+    userName: {
+        type: String,
+        required: true
+    },
     name: {
         type: String,
         required: true

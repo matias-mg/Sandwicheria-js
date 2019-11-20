@@ -1,59 +1,60 @@
-import React, { Fragment, useContext } from 'react'
+import React, { Fragment, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import AuthContext from '../../context/auth/authContext';
 import FoodOrderContext from '../../context/foodorder/foodOrderContext';
 
 const Navbar = () => {
-    const authContext = useContext(AuthContext);
-    const foodOrderContext = useContext(FoodOrderContext);
+  const authContext = useContext(AuthContext);
+  const foodOrderContext = useContext(FoodOrderContext);
 
-    const { isAuthenticated, logout, user } = authContext;
-    const { clearOrders } = foodOrderContext;
+  const { isAuthenticated, logout, user } = authContext;
+  const { clearOrders } = foodOrderContext;
 
-    const onLogout = () => {
-        logout();
-        clearOrders();
-    }
+  const onLogout = () => {
+    logout();
+    clearOrders();
+  };
 
-    const authLinks = (
-        <Fragment>
-            {user && user.userType === 0 ? 
-                <li>¡Hola {user && user.name}!</li>
-                :
-                <li>
-                <a href="#!">
-                    Ordenes
-                </a>
-                <a href="#!">
-                    Administración
-                </a>
-            </li>
-            }
-            
-            <li>
-                <a href="#!" onClick={onLogout}>
-                    <i className="fas fa-sign-out-alt"></i><span className="hide-sm"> Cerrar Sesión</span>
-                </a>
-            </li>
-        </Fragment>
-    );
+  const authLinks = (
+    <Fragment>
+      {user && user.userType === 0 ? (
+        <li>¡Hola {user && user.name}!</li>
+      ) : (
+        <li>
+          <Link to="/">Ordenes</Link>
+          <Link to="/administrar">Administración</Link>
+        </li>
+      )}
 
-    const guestLinks = (
-        <Fragment>
-            <li><Link to="/register">Registro</Link></li>
-            <li><Link to="/login">Iniciar sesión</Link></li>
-        </Fragment>
-    )
-    return (
-        <nav className="navbar">
-            <div className="container-nav">
-                <h1><i className="fas fa-utensils"></i> Sandwichería JS</h1>
-                <ul>
-                    {isAuthenticated ? authLinks : guestLinks}
-                </ul>
-            </div>
-        </nav>
-    )
-}
+      <li>
+        <a href='#!' onClick={onLogout}>
+          <i className='fas fa-sign-out-alt'></i>
+          <span className='hide-sm'> Cerrar Sesión</span>
+        </a>
+      </li>
+    </Fragment>
+  );
 
-export default Navbar
+  const guestLinks = (
+    <Fragment>
+      <li>
+        <Link to='/register'>Registro</Link>
+      </li>
+      <li>
+        <Link to='/login'>Iniciar sesión</Link>
+      </li>
+    </Fragment>
+  );
+  return (
+    <nav className='navbar'>
+      <div className='container-nav'>
+        <h1>
+          <i className='fas fa-utensils'></i> Sandwichería JS
+        </h1>
+        <ul>{isAuthenticated ? authLinks : guestLinks}</ul>
+      </div>
+    </nav>
+  );
+};
+
+export default Navbar;

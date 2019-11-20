@@ -1,8 +1,10 @@
 import React, { useState, useContext, useEffect } from 'react';
 import FoodMenuContext from '../../../context/foodmenu/foodMenuContext';
+import AlertContext from '../../../context/alert/alertContext';
 
 const FoodMenuForm = () => {
     const foodMenuContext = useContext(FoodMenuContext);
+    const alertContext = useContext(AlertContext);
     const { current, addFoodMenu, updateFoodMenu, clearCurrent } = foodMenuContext;
 
     useEffect(() => {
@@ -30,6 +32,11 @@ const FoodMenuForm = () => {
     const onSubmit = e => {
         e.preventDefault();
 
+        if(!name || !category || !description || !price) {
+            alertContext.setAlert('Complete todos los campos, por favor.', 'warning');
+            return;
+        }
+
         if (current !== null) {
             updateFoodMenu(foodMenu);
         } else {
@@ -55,10 +62,10 @@ const FoodMenuForm = () => {
             <input type='radio' name='category' value='Completo' checked={category === 'Completo'} onChange={onChange} />{' '} Completo{' '}
             <input type='radio' name='category' value='Sandwich' checked={category === 'Sandwich'} onChange={onChange} />{' '} Sandwich
             <input type='text' placeholder='Nombre de promoción' name='name' value={name} onChange={onChange} />
-            <input type='text' placeholder='Descripción' name='description' value={description} onChange={onChange} />
+            <textarea type='te' placeholder='Descripción' name='description' value={description} onChange={onChange} />
             <input type='number' placeholder='Precio' name='price' value={price} onChange={onChange} />
             <div>
-                <input type='submit' value={current ? 'Update Contact' : 'Añadir promoción'} className='btn btn-primary btn-block btn-form'/>
+                <input type='submit' value={current ? 'Actualizar promoción' : 'Añadir promoción'} className='btn btn-primary btn-block btn-form'/>
             </div>
             {current && (
                 <div>

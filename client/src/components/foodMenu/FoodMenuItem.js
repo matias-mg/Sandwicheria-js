@@ -1,18 +1,44 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
 import { badgeColor, foodCategory } from '../../utilities/functions';
 import PropTypes from 'prop-types';
 import sushi from '../img/sushi-img.jpg'
+import sandwich from '../img/sandwich-img.jpg'
+import completo from '../img/completo-img.jpg'
 import FoodOrderContext from '../../context/foodorder/foodOrderContext';
+import FoodMenuContext from '../../context/foodmenu/foodMenuContext';
+import AuthContext from '../../context/auth/authContext';
 
-function FoodMenuItem({ foodMenu }) {
-    const { name, category, description, price } = foodMenu;
+const FoodMenuItem = ({ foodMenu }) => {
+    const imageFood = (category) => {
+        switch (category) {
+            case 'Sushi':
+                return <img src={sushi} alt={category} />
+            case 'Completo':
+                return <img src={completo} alt={category} />
+            case 'Sandwich':
+                return <img src={sandwich} alt={category} />
+            default:
+                return;
+        }
+    }
+
+    const { _id, name, category, description, price } = foodMenu;
 
     const foodOrderContext = useContext(FoodOrderContext);
+    const authContext = useContext(AuthContext);
+    const foodMenuContext = useContext(FoodMenuContext);
+
+    const { deleteFoodMenu, setCurrent } = foodMenuContext;
+
+    const { user } = authContext;
 
     const addOrder = () => {
         foodOrderContext.addOrder(foodMenu);
     }
+
+    const deleteOrder = () => {
+        deleteFoodMenu(_id);
+      };
 
     return (
         <div className="card bg-menu">
@@ -27,11 +53,19 @@ function FoodMenuItem({ foodMenu }) {
                     </li>
                     <li><p className="price">$ {price.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}</p></li>
                 </ul>
-                <button className="btn btn-primary">Ver + detalles</button>
-                <button className="btn btn-secondary" onClick={addOrder} >Ordenar promoción</button>
+                {user && user.userType === 0 ?
+                <div>
+                    <button className="btn btn-primary">Ver + detalles</button>
+                    <button className="btn btn-secondary" onClick={addOrder} >Ordenar promoción</button>
+                </div>
+                :
+                <div>
+                    <button className='btn btn-primary' onClick={() => setCurrent(foodMenu)}>Editar</button>
+                    <button className='btn btn-secondary' onClick={deleteOrder}>Eliminar Promoción</button>    
+                </div>}
             </div>
             <div>
-                <img src={sushi} alt="" />
+                {imageFood(category)}
             </div>
         </div>
     )

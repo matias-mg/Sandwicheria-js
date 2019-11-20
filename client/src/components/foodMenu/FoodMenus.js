@@ -24,11 +24,9 @@ function FoodMenus() {
         <Fragment>
             {foodMenus !== null && !loading ? (
                 <TransitionGroup>
-                    {foodMenus.length > 0 ?
-                        user && authContext.user.userType === 0 ? 
+                    {foodMenus.length > 0 && !loading ?
+                        user &&  
                         foodMenus.map(foodMenu => <FoodMenuItem key={foodMenu.id} foodMenu={foodMenu} />)
-                        :
-                        foodMenus.map(foodMenu => <AdminFoodMenuItem key={foodMenu.id} foodMenu={foodMenu} />)
                         :
                             <Spinner />
                         }
