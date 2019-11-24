@@ -3,7 +3,6 @@ import FoodMenus from '../foodMenu/FoodMenus';
 import FoodOrders from '../foodMenu/client/FoodOrders';
 import AuthContext from '../../context/auth/authContext';
 import FoodOrderContext from '../../context/foodorder/foodOrderContext';
-import FoodMenuForm from '../foodMenu/admin/FoodMenuForm';
 import Spinner from '../../components/layout/Spinner';
 
 function Home() {
@@ -22,32 +21,35 @@ function Home() {
 
     return (
         <Fragment>
-            {user && !loading ? user && !loading && user.userType === 0 ? 
-            <div className="grid-2">
-                <div>
-                    <h2>Promociones Disponibles</h2>
-                    <FoodMenus />
-                </div>
-                <div>
-                    <div className="history">
-                        <h2 className={state === false && 'active'} onClick={() => setState(false)}>Pedidos Activos</h2>
-                        <h2 className={state === true && 'active'} onClick={() => setState(true)}>Historial de Pedidos</h2>
+            {user && !loading ? user && !loading && user.userType === 0 ?
+                <div className="grid-2">
+                    <div>
+                        <h2>Promociones Disponibles</h2>
+                        <FoodMenus />
                     </div>
-                    <FoodOrders onProcess={true} />
+                    <div className="container-scroll">
+                        <div className="history">
+                            <h2 className={state === false && 'active'} onClick={() => setState(false)}>Pedidos Activos</h2>
+                            <h2 className={state === true && 'active'} onClick={() => setState(true)}>Historial de Pedidos</h2>
+                        </div>
+                        <FoodOrders onProcess={true} checkHistory={state} />
+                    </div>
                 </div>
-            </div>
-            :
-            <div className="grid-2">
-                <div>
-                    <h2>Pedidos Pendientes</h2>
-                    <FoodOrders onProcess={false} />
+                :
+                <div className="grid-2">
+                    <div>
+                        <h2>Pedidos Pendientes</h2>
+                        <FoodOrders onProcess={false} checkHistory={state} />
+                    </div>
+                    <div>
+                        <div className="history">
+                            <h2 className={state === false && 'active'} onClick={() => setState(false)}>Control de Pedidos</h2>
+                            <h2 className={state === true && 'active'} onClick={() => setState(true)}>Historial de Pedidos</h2>
+                        </div>
+                        <FoodOrders onProcess={true} checkHistory={state} />
+                    </div>
                 </div>
-                <div>
-                    <h2>Control de Pedidos</h2>
-                    <FoodOrders onProcess={true} />
-                </div>
-            </div>
-             : <Spinner />}
+                : <Spinner />}
         </Fragment>
     )
 }

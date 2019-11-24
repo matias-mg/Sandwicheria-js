@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { Fragment, useContext } from 'react';
 import { badgeColor, foodCategory, statusColor } from '../../../utilities/functions';
 import FoodOrderContext from '../../../context/foodorder/foodOrderContext';
 import AuthContext from '../../../context/auth/authContext';
@@ -24,9 +24,9 @@ function FoodOrderItem({ foodOrder }) {
                     <p className="text-gray">{description}</p>
                 </li>
                 {user && user.userType === 1 && userName &&
-                <li>
-                    <h4 className="text-dark">Solicitante: {userName}</h4>
-                </li>
+                    <li>
+                        <h4 className="text-dark">Solicitante: {userName}</h4>
+                    </li>
                 }
                 <span className="text-card text-card-secondary">
                     <li>
@@ -40,12 +40,19 @@ function FoodOrderItem({ foodOrder }) {
                 </span>
             </ul>
             {user && user.userType === 0 ?
-            <button className="btn btn-danger center-x" onClick={() => cancelOrder(_id)}>Cancelar pedido</button>
-            :
-            <div>
-            <button className="btn btn-success" onClick={() => updateFoodOrder(_id)}>Aceptar pedido</button>
-            <button className="btn btn-danger" onClick={() => cancelOrder(_id)}>Rechazar pedido</button>
-            </div>
+                <div className="text-right">
+                    <button className="btn btn-danger center-x" onClick={() => cancelOrder(_id)}>Cancelar pedido</button>
+                </div>
+                :
+                status && status === "en espera" ?
+                    <Fragment>
+                        <button className="btn btn-success" onClick={() => updateFoodOrder(_id)}>Aceptar pedido</button>
+                        <button className="btn btn-danger" onClick={() => cancelOrder(_id)}>Rechazar pedido</button>
+                    </Fragment>
+                    :
+                    <div className="text-right">
+                        <button className="btn btn-secondary" onClick={() => updateFoodOrder(_id)}>Actualizar pedido</button>
+                    </div>
             }
         </div>
     )
@@ -56,17 +63,3 @@ FoodOrderItem.propTypes = {
 }
 
 export default FoodOrderItem;
-
-/* <li>
-<p className="price">Total: {<span className="text-success">$ {price.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}</span>}</p>
-</li>
-<li>
-<p className="text-primary">
-    Estado: <span className={statusColor(status)}>{status.charAt(0).toUpperCase() + status.slice(1)}</span>
-</p>
-</li>
-{orderDetails && (<li>
-<p className="text-primary">
-    Detalles: <span className="badge badge-details badge-light-gray">{orderDetails}</span>
-</p>
-</li>)} */

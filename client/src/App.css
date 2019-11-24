@@ -84,6 +84,14 @@ h1, h2, h3 {
   padding: 0.7rem 1.5rem;
   color: #444;
 }
+/* 
+.container-scroll {
+  position: fixed;
+  right: 10px;
+  max-height: 85vh;
+  min-width: 471px;
+  overflow: scroll;
+} */
 
 .history {
   display: flex;
@@ -121,6 +129,10 @@ h1, h2, h3 {
 
 .text-center {
   text-align: center;
+}
+
+.text-right {
+  text-align: right;
 }
 
 .text-primary {
@@ -178,8 +190,8 @@ h1, h2, h3 {
 .text-card {
   display: flex;
   justify-content: space-around;
-  margin: 0.5rem 0;
-  padding: 1rem;
+  margin-top: 0.5rem;
+  padding: 0.65rem;
   border-radius: 10px;
 }
 
@@ -597,6 +609,12 @@ table th {
 }
 
 /* Navbar */
+
+nav {
+  position: sticky;
+  top: 0;
+}
+
 .navbar {
   padding: 0.7rem 2rem;
   z-index: 1;

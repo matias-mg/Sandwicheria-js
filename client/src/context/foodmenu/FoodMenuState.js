@@ -16,7 +16,8 @@ const FoodMenuState = props => {
   const initialState = {
     foodMenus: [],
     current: null,
-    error: null
+    error: null,
+    loading: true
   };
 
   const [state, dispatch] = useReducer(foodMenuReducer, initialState);

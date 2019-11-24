@@ -45,7 +45,7 @@ const Register = (props) => {
             setAlert('Las contraseñas no coinciden', 'danger')
         } else {
             register({
-                name,
+                name: name.charAt(0).toUpperCase() + name.slice(1),
                 email,
                 password
             })
@@ -57,7 +57,7 @@ const Register = (props) => {
             <h1 className="text-center text-primary">Registro de Usuario</h1>
             <form onSubmit={onSubmit}>
                 <div className="form-group">
-                    <label htmlFor="name">Nombre:</label>
+                    <label htmlFor="name">Nombre y Apellido:</label>
                     <input type="text" name="name" value={name} onChange={onChange} />
                 </div>
                 <div className="form-group">
