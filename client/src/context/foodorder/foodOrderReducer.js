@@ -4,7 +4,9 @@ import {
     FOODORDER_ERROR,
     GET_FOODORDERS,
     CLEAR_FOODORDERS,
-    UPDATE_FOODORDER
+    UPDATE_FOODORDER,
+    FILTER_FOODORDER,
+    CLEAR_FILTER
 } from '../types';
 
 export default (state, action) => {
@@ -30,7 +32,7 @@ export default (state, action) => {
         case UPDATE_FOODORDER:
             return {
                 ...state,
-                foodOrders: state.foodOrders.map(order => 
+                foodOrders: state.foodOrders.map(order =>
                     order._id === action.payload._id ? action.payload : order),
                 loading: false
             }
@@ -44,6 +46,19 @@ export default (state, action) => {
             return {
                 ...state,
                 error: action.payload
+            }
+        case FILTER_FOODORDER:
+            return {
+                ...state,
+                filtered: state.foodOrders.filter(order => {
+                    const regEx = new RegExp(`${action.payload}`, 'gi');
+                    return order.name.match(regEx) || order.userName.match(regEx);
+                })
+            }
+        case CLEAR_FILTER:
+            return {
+                ...state,
+                filtered: null
             }
         default:
             return state;

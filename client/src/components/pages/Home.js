@@ -1,6 +1,7 @@
 import React, { Fragment, useContext, useEffect, useState } from 'react';
 import FoodMenus from '../foodMenu/FoodMenus';
-import FoodOrders from '../foodMenu/client/FoodOrders';
+import FoodOrders from '../foodOrder/FoodOrders';
+import FoodOrderFilter from '../foodOrder/FoodOrderFilter'
 import AuthContext from '../../context/auth/authContext';
 import FoodOrderContext from '../../context/foodorder/foodOrderContext';
 import Spinner from '../../components/layout/Spinner';
@@ -32,6 +33,7 @@ function Home() {
                             <h2 className={state === false && 'active'} onClick={() => setState(false)}>Pedidos Activos</h2>
                             <h2 className={state === true && 'active'} onClick={() => setState(true)}>Historial de Pedidos</h2>
                         </div>
+                        <FoodOrderFilter />
                         <FoodOrders onProcess={true} checkHistory={state} />
                     </div>
                 </div>
@@ -46,6 +48,7 @@ function Home() {
                             <h2 className={state === false && 'active'} onClick={() => setState(false)}>Control de Pedidos</h2>
                             <h2 className={state === true && 'active'} onClick={() => setState(true)}>Historial de Pedidos</h2>
                         </div>
+                        <FoodOrderFilter />
                         <FoodOrders onProcess={true} checkHistory={state} />
                     </div>
                 </div>

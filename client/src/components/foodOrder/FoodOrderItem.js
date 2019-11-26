@@ -1,7 +1,7 @@
 import React, { Fragment, useContext } from 'react';
-import { badgeColor, foodCategory, statusColor } from '../../../utilities/functions';
-import FoodOrderContext from '../../../context/foodorder/foodOrderContext';
-import AuthContext from '../../../context/auth/authContext';
+import { badgeColor, foodCategory, statusColor } from '../../utilities/functions';
+import FoodOrderContext from '../../context/foodorder/foodOrderContext';
+import AuthContext from '../../context/auth/authContext';
 import PropTypes from 'prop-types';
 
 function FoodOrderItem({ foodOrder }) {
@@ -40,6 +40,7 @@ function FoodOrderItem({ foodOrder }) {
                 </span>
             </ul>
             {user && user.userType === 0 ?
+                foodOrder.status !== 'finalizado' &&
                 <div className="text-right">
                     <button className="btn btn-danger center-x" onClick={() => cancelOrder(_id)}>Cancelar pedido</button>
                 </div>
@@ -50,8 +51,14 @@ function FoodOrderItem({ foodOrder }) {
                         <button className="btn btn-danger" onClick={() => cancelOrder(_id)}>Rechazar pedido</button>
                     </Fragment>
                     :
+                    status !== 'lista para retirar' && status !== 'finalizado' ?
                     <div className="text-right">
                         <button className="btn btn-secondary" onClick={() => updateFoodOrder(_id)}>Actualizar pedido</button>
+                    </div>
+                    :
+                    status === 'lista para retirar' &&
+                    <div className="text-right">
+                        <button className="btn btn-danger" onClick={() => updateFoodOrder(_id)}>Finalizar pedido</button>
                     </div>
             }
         </div>

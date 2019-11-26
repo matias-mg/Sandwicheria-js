@@ -1,14 +1,14 @@
 import React, { Fragment, useContext, useEffect } from 'react';
-import FoodOrderContext from '../../../context/foodorder/foodOrderContext';
-import AuthContext from '../../../context/auth/authContext';
-import FoodOrderItem from './FoodOrderItem';
-import Spinner from '../../layout/Spinner';
+import FoodOrderContext from '../../context/foodorder/foodOrderContext';
+import AuthContext from '../../context/auth/authContext';
+import FoodOrderItem from '../foodOrder/FoodOrderItem';
+import Spinner from '../layout/Spinner';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 function FoodOrders(props) {
   const foodOrderContext = useContext(FoodOrderContext);
   const authContext = useContext(AuthContext);
-  const { foodOrders, getFoodOrders, loading } = foodOrderContext;
+  const { foodOrders, getFoodOrders, loading, filtered } = foodOrderContext;
 
   let checkFoodOrders = [];
 
@@ -25,7 +25,8 @@ function FoodOrders(props) {
   }, [props.checkHistory]);
 
 
-  if (foodOrders !== null && !loading && props.checkHistory === false && [...checkFoodOrders].filter(fo => fo.status !== "finalizado").length === 0) {
+  if (foodOrders !== null && !loading && props.checkHistory === false && 
+    [...checkFoodOrders].filter(fo => fo.status !== "finalizado").length === 0) {
     return (
       <h4 className='card bg-order text-center text-dark'>No tienes ningún pedido en espera...</h4>
     );

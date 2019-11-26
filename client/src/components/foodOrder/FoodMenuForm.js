@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
-import FoodMenuContext from '../../../context/foodmenu/foodMenuContext';
-import AlertContext from '../../../context/alert/alertContext';
+import FoodMenuContext from '../../context/foodmenu/foodMenuContext';
+import AlertContext from '../../context/alert/alertContext';
 
 const FoodMenuForm = () => {
     const foodMenuContext = useContext(FoodMenuContext);

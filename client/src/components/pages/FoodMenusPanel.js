@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import FoodMenus from '../foodMenu/FoodMenus';
 import AuthContext from '../../context/auth/authContext';
-import FoodMenuForm from '../foodMenu/admin/FoodMenuForm';
+import FoodMenuForm from '../foodOrder/FoodMenuForm';
 
 function FoodMenusPanel() {
   const authContext = useContext(AuthContext);

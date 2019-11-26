@@ -8,13 +8,16 @@ import {
     FOODORDER_ERROR,
     GET_FOODORDERS,
     CLEAR_FOODORDERS,
-    UPDATE_FOODORDER
+    UPDATE_FOODORDER,
+    FILTER_FOODORDER,
+    CLEAR_FILTER
 } from '../types';
 
 const FoodOrderState = props => {
     const initialState = {
         foodOrders: null,
-        error: null
+        error: null,
+        filtered: null
     };
 
     const [state, dispatch] = useReducer(foodOrderReducer, initialState);
@@ -63,10 +66,10 @@ const FoodOrderState = props => {
     const cancelOrder = async (id) => {
         try {
             await axios.delete(`/api/food-order/${id}`);
-            
-            dispatch({ 
-                type: CANCEL_FOODORDER, 
-                payload: id 
+
+            dispatch({
+                type: CANCEL_FOODORDER,
+                payload: id
             });
         } catch (err) {
             dispatch({
@@ -89,7 +92,7 @@ const FoodOrderState = props => {
             dispatch({
                 type: FOODORDER_ERROR,
                 payload: err.response.data.msg
-            })   
+            })
         }
     };
 
@@ -100,15 +103,33 @@ const FoodOrderState = props => {
         })
     }
 
+    // Filter food order
+    const filterOrders = (text) => {
+        dispatch({
+            type: FILTER_FOODORDER,
+            payload: text
+        })
+    }
+
+    // Clear filter food order
+    const clearFilter = () => {
+        dispatch({
+            type: CLEAR_FILTER
+        })
+    }
+
     return (
         <FoodOrderContext.Provider value={{
             foodOrders: state.foodOrders,
             error: state.error,
+            filtered: state.filtered,
             addOrder,
             cancelOrder,
             getFoodOrders,
             clearOrders,
-            updateFoodOrder
+            updateFoodOrder,
+            filterOrders,
+            clearFilter
         }}>
             {props.children}
         </FoodOrderContext.Provider>
