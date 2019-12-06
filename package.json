@@ -1,5 +1,5 @@
 {
-  "name": "SandwicheriaJS",
+  "name": "sandwicheria-js",
   "version": "1.0.0",
   "description": "Platform to online order",
   "main": "index.js",
@@ -8,7 +8,8 @@
     "server": "nodemon server.js",
     "client": "npm start --prefix client",
     "client-i": "npm install --prefix client",
-    "d": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "keywords": [],
   "author": "",
