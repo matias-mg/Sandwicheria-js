@@ -2,6 +2,7 @@ import React, { Fragment, useContext } from 'react';
 import { badgeColor, foodCategory, statusColor } from '../../utilities/functions';
 import FoodOrderContext from '../../context/foodorder/foodOrderContext';
 import AuthContext from '../../context/auth/authContext';
+import AlertContext from '../../context/alert/alertContext';
 import PropTypes from 'prop-types';
 
 function FoodOrderItem({ foodOrder }) {
@@ -9,10 +10,18 @@ function FoodOrderItem({ foodOrder }) {
 
     const foodOrderContext = useContext(FoodOrderContext);
     const authContext = useContext(AuthContext);
+    const alertContext = useContext(AlertContext);
 
     const { user } = authContext;
     const { updateFoodOrder, cancelOrder } = foodOrderContext;
 
+    const cancelOrderCheck = () => {
+        if (status !== "en espera") {
+            alertContext.setAlert("No puedes cancelar un pedido en preparación o ya finalizado.", "warning");
+        } else {
+            cancelOrder(_id);
+        }
+    }
     return (
         <div className="card bg-order-secondary">
             <span className={'badge ' + badgeColor(category)}>
@@ -42,7 +51,7 @@ function FoodOrderItem({ foodOrder }) {
             {user && user.userType === 0 ?
                 foodOrder.status !== 'finalizado' &&
                 <div className="text-right">
-                    <button className="btn btn-danger center-x" onClick={() => cancelOrder(_id)}>Cancelar pedido</button>
+                    <button className="btn btn-danger center-x" onClick={cancelOrderCheck}>Cancelar pedido</button>
                 </div>
                 :
                 status && status === "en espera" ?

@@ -57,7 +57,7 @@ const FoodOrderState = props => {
         } catch (err) {
             dispatch({
                 type: FOODORDER_ERROR,
-                payload: err.response.msg
+                payload: err.response
             });
         }
     }
@@ -74,7 +74,7 @@ const FoodOrderState = props => {
         } catch (err) {
             dispatch({
                 type: FOODORDER_ERROR,
-                payload: err.response.msg
+                payload: err.response
             });
         }
     }
@@ -91,7 +91,7 @@ const FoodOrderState = props => {
         } catch (err) {
             dispatch({
                 type: FOODORDER_ERROR,
-                payload: err.response.data.msg
+                payload: err.response.data
             })
         }
     };

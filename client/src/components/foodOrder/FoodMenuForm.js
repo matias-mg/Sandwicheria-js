@@ -55,7 +55,7 @@ const FoodMenuForm = () => {
     }
 
     return (
-        <form onSubmit={onSubmit} className="bg-order card">
+        <form onSubmit={onSubmit} className="bg-order-secondary card">
             <h2 className='text-primary mb-1'>{current ? 'Edit Contact' : 'Añadir promoción'}</h2>
             <h4>Tipo de promoción</h4>
             <input type='radio' name='category' value='Sushi' checked={category === 'Sushi'} onChange={onChange}/>{' '} Sushi{' '}

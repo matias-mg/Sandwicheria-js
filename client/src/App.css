@@ -192,7 +192,7 @@ h1, h2, h3 {
   justify-content: space-around;
   margin-top: 0.5rem;
   padding: 0.65rem;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 .text-card-secondary {

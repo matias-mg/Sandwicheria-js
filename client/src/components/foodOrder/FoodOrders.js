@@ -2,7 +2,6 @@ import React, { Fragment, useContext, useEffect } from 'react';
 import FoodOrderContext from '../../context/foodorder/foodOrderContext';
 import AuthContext from '../../context/auth/authContext';
 import FoodOrderItem from '../foodOrder/FoodOrderItem';
-import Spinner from '../layout/Spinner';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 function FoodOrders(props) {

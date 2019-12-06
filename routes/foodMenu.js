@@ -8,8 +8,8 @@ const adminAuth = require('../middleware/adminAuth');
 
 // @route 	 GET api/food-menu
 // @desc 	 Get all menus
-// @access 	 Private
-router.get('/', auth, async (req, res) => {
+// @access 	 Public
+router.get('/', async (req, res) => {
     try {
         const foodMenus = await FoodMenu.find().sort({ date: -1 });
         res.json(foodMenus);

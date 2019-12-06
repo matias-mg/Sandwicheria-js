@@ -56,6 +56,12 @@ const Login = (props) => {
                 </div>
                 <input type="submit" value="Iniciar sesión" className="btn btn-success btn-block btn-form" />
             </form>
+            <div className="container-auth bg-light">
+                <h4 className="mt-1">Tip</h4>
+                <p className="text-gray">Tal vez quieras iniciar sesión con permisos de administrador ;).</p>
+                <p className="mb-1 text-gray">Si ese es el caso, utiliza admin@gmail.com - "123456"</p>
+                <p className="text-secondary">¡Gracias por probar mi Software!</p>
+            </div>
         </div>
     )
 }
