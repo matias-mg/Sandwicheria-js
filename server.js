@@ -9,7 +9,7 @@ const app = express();
 // Conect to Database
 connectDB();
 
-app.use(express.json());
+app.use(express.json({ extended: false}));
 
 // Define routes
 app.use('/api/food-menu', require('./routes/foodMenu'));

@@ -1,8 +1,8 @@
 {
   "name": "sandwicheria-js",
   "version": "1.0.0",
-  "description": "Platform to online order",
-  "main": "index.js",
+  "description": "Platform to order online",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "server": "nodemon server.js",
