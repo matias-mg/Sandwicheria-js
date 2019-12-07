@@ -11,7 +11,7 @@
   --gray-color: #5c5c5c;
   --orange-color: #ee9b3b;
   --light-gray-color: #e2e2e2;
-  --danger-color: #dc3545;
+  --danger-color: #c82435;
   --warning-color: #dfba19;
   --success-color: #179227;
 }
@@ -42,7 +42,7 @@ a:hover {
   color: #666;
 }
 
-ul {
+li {
   list-style: none;
 }
 
@@ -270,6 +270,16 @@ h1, h2, h3 {
   margin-top: 2rem;
 }
 
+.mr-1 {
+  margin-right: 0.1rem;
+}
+.mr-2 {
+  margin-right: 0.3rem;
+}
+.mr-3 {
+  margin-right: 2rem;
+}
+
 .mb-1 {
   margin-bottom: 0.5rem;
 }
@@ -298,18 +308,6 @@ h1, h2, h3 {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 3rem;
-}
-
-.grid-3 {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 1rem;
-}
-
-.grid-4 {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 2rem;
 }
 
 .grid-2-3 {
@@ -598,23 +596,6 @@ h3 {
   text-align: center;
 }
 
-table th,
-table td {
-  padding: 1rem;
-  text-align: left;
-}
-
-table th {
-  background: var(--light-color);
-}
-
-/* Navbar */
-
-nav {
-  position: sticky;
-  top: 0;
-}
-
 .navbar {
   padding: 0.7rem 2rem;
   z-index: 1;
@@ -710,10 +691,46 @@ nav {
   .container-nav {
     display: flex;
     flex-direction: column;
-    text-align: center;
+    padding: 0;
   }
 
-  .navbar h1 {
+  .container-nav i {
+    margin-right: 0;
+  }
+
+  .container-nav h1 {
+    font-size: 1.4rem;
     margin-bottom: 0.5rem;
+  }
+
+  .container-nav ul {
+    font-size: 1rem;
+  }
+
+  .container-nav ul li {
+    padding: 0.2rem 0;
+  }
+
+  /* Utilities */
+  .container {
+    padding: 0 1rem;
+  }
+
+  .bg-menu {
+    margin: 0.8rem 0;
+  }
+
+  .text-card {
+    flex-direction: column;
+  }
+
+  .btn {
+    padding: 0.3rem 0;
+  }
+}
+
+@media (max-width: 340px) {
+  .container-nav ul i {
+    display: none;
   }
 }

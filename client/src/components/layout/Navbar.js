@@ -18,32 +18,35 @@ const Navbar = (props) => {
   const authLinks = (
     <Fragment>
       {user && user.userType === 0 ? (
-        <li>¡Hola {user && user.name}!</li>
+        <li>¡Hola {user && user.name.charAt(0).toUpperCase() + user.name.slice(1)}!</li>
       ) : (
-        <li>
-          <Link to="/">Ordenes</Link>
-          <Link to="/administrar">Administración</Link>
-        </li>
-      )}
+          <Fragment>
+            <ul>
+              <li>
+                <Link to="/"><i class="far fa-paper-plane"></i> Ordenes</Link>
+              </li>
+              <li>
+                <Link to="/administrar"><i class="far fa-edit"></i> Administración</Link>
+              </li>
+            </ul>
+          </Fragment>
+        )}
 
-      <li>
-        <a href='#!' onClick={onLogout}>
-          <i className='fas fa-sign-out-alt'></i>
-          <Link to="/login">Cerrar Sesión</Link>
-        </a>
-      </li>
+      <a href='#!' onClick={onLogout}>
+        <Link to="/login"><i className='fas fa-sign-out-alt mr-1'></i> Cerrar Sesión</Link>
+      </a>
     </Fragment>
   );
 
   const guestLinks = (
-    <Fragment>
+    <ul>
       <li>
-        <Link to='/register'>Registro</Link>
+        <Link to='/register'><i class="fas fa-user-plus mr-1"></i> Registro</Link>
       </li>
       <li>
-        <Link to='/login'>Iniciar sesión</Link>
+        <Link to='/login'><i class="fas fa-sign-in-alt mr-2"></i> Iniciar sesión</Link>
       </li>
-    </Fragment>
+    </ul>
   );
   return (
     <nav className='navbar'>
@@ -51,7 +54,7 @@ const Navbar = (props) => {
         <h1>
           <i className='fas fa-utensils'></i> Sandwichería JS
         </h1>
-        <ul>{isAuthenticated ? authLinks : guestLinks}</ul>
+        {isAuthenticated ? authLinks : guestLinks}
       </div>
     </nav>
   );

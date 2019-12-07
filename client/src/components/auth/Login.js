@@ -58,9 +58,11 @@ const Login = (props) => {
             </form>
             <div className="container-auth bg-light">
                 <h4 className="mt-1">Tip</h4>
-                <p className="text-gray">Tal vez quieras iniciar sesión con permisos de administrador ;).</p>
-                <p className="mb-1 text-gray">Si ese es el caso, utiliza admin@gmail.com - "123456"</p>
-                <p className="text-secondary">¡Gracias por probar mi Software!</p>
+                <p className="text-gray my-1">Tal vez quiera iniciar sesión con permisos de administrador ;)</p>
+                <p className="mb-1 text-gray">Si ese es el caso, utilice:</p>
+                <p className="text-primary">User: "admin@gmail.com"</p>
+                <p className="text-primary mb-1">Password: "123456"</p>
+                <p className="text-secondary"><strong>¡Gracias por probar mi Software!</strong></p>
             </div>
         </div>
     )

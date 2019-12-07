@@ -45,8 +45,8 @@ function Home() {
                     </div>
                     <div>
                         <div className="history">
-                            <h2 className={state === false && 'active'} onClick={() => setState(false)}>Control de Pedidos</h2>
-                            <h2 className={state === true && 'active'} onClick={() => setState(true)}>Historial de Pedidos</h2>
+                            <h2 className={state === false && 'active'} onClick={() => setState(false)}>Control Pedidos</h2>
+                            <h2 className={state === true && 'active'} onClick={() => setState(true)}>Historial Pedidos</h2>
                         </div>
                         <FoodOrderFilter />
                         <FoodOrders onProcess={true} checkHistory={state} />
