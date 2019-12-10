@@ -72,6 +72,12 @@ const Register = props => {
           <label htmlFor='password2'>Confirme contraseña:</label>
           <input type='password' name='password2' value={password2} onChange={onChange} />
         </div>
+        <div className='container-auth bg-light'>
+          <h4 className=''>¿Preocupado por su seguridad?</h4>
+          <p className='text-gray my-1'>
+            No se preocupe, para su tranquilidad, su contraseña será exitosamente cifrada con la librería <span className="text-primary">"bcrypt"</span>.
+          </p>
+        </div>
         <div className="mt-3">
           <input
             type='submit'
